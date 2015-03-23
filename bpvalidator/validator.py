@@ -75,18 +75,22 @@ class LinkGraphValidator:
         validity = True
         errors = []
 
-        r = requests.get(MESSAGE_DATABASE_SERVER_URL)
-        data = r.json()
-        for t in topics:
-            tname = t.find(ns[appns]+'id').text
-            if not tname:
-                validity = False
-                errors.append("No Topic Name Specified.")
-            if not self.search_topic(data, tname):
-                validity = False
-                errors.append("No Matched Topic: ["+tname+"]")
+        try:
+            r = requests.get(MESSAGE_DATABASE_SERVER_URL, timeout=2)
 
-        return validity, None if validity else errors
+            data = r.json()
+            for t in topics:
+                tname = t.find(ns[appns]+'id').text
+                if not tname:
+                    validity = False
+                    errors.append("No Topic Name Specified.")
+                if not self.search_topic(data, tname):
+                    validity = False
+                    errors.append("No Matched Topic: ["+tname+"]")
+
+            return validity, None if validity else errors
+        except:
+            return False, ["Message DB is not available."]
 
 
     def check_linkgraph_edges(self, edges, nodes, topics, ns, appns):
