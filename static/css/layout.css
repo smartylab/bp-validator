@@ -13,13 +13,14 @@ div.layout-header {
     height: 60px;
     background: #f1f1f1;
     border-bottom: 1px solid #dddddd;
+    color: #0066cc;
 }
 
 div.layout-header .title {
     display: block;
-    font-size: 16pt;
+    font-size: 24pt;
     font-weight: bold;
-    padding: 18px 20px;
+    padding: 12px 20px;
 }
 
 div.layout-header .menu {
@@ -32,21 +33,28 @@ div.layout-outer {
 }
 
 div.layout-menu {
-    width: 210px;
+    width: 0px;
 }
 
 div.layout-main {
     position: relative;
-    width: 810px;
+    width: 1024px;
+}
+
+div.layout-footer {
+    width: 100%;
+    height: 60px;
+    margin: 50px 0px auto;
+    font-size: 80%;
 }
 
 .root {
-    width: 810px;
+    width: 1024px;
     clear: both;
 }
 
 .col2 {
-    width: 402px;
+    width: 500px;
 }
 
 .col3 {

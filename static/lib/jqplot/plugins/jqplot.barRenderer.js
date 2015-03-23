@@ -77,7 +77,7 @@
         // prop: varyBarColor
         // true to color each bar of a series separately rather than
         // have every bar of a given series the same color.
-        // If used for non-stacked multiple series bar plots, user should
+        // If used for non-stacked multiple series bar plots, patternrecognition should
         // specify a separate 'seriesColors' array for each series.
         // Otherwise, each series will set their bars to the same color array.
         // This option has no Effect for stacked bar charts and is disabled.
@@ -108,7 +108,7 @@
         };
         this._type = 'bar';
         
-        // if user has passed in highlightMouseDown option and not set highlightMouseOver, disable highlightMouseOver
+        // if patternrecognition has passed in highlightMouseDown option and not set highlightMouseOver, disable highlightMouseOver
         if (options.highlightMouseDown && options.highlightMouseOver == null) {
             options.highlightMouseOver = false;
         }
@@ -683,7 +683,7 @@
         }
     }
     
-    // called within context of plot
+    // called within measurement of plot
     // create a canvas which we can draw on.
     // insert it before the eventCanvas, so eventCanvas will still capture events.
     function postPlotDraw() {

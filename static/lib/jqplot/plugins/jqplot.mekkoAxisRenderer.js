@@ -275,7 +275,7 @@
                 dim = this._plotDimensions.height;
             }
             
-            // if min, max and number of ticks specified, user can't specify interval.
+            // if min, max and number of ticks specified, patternrecognition can't specify interval.
             if (this.min != null && this.max != null && this.numberTicks != null) {
                 this.tickInterval = null;
             }
@@ -302,7 +302,7 @@
             if (this.name == 'yaxis' || this.name == 'y2axis') { 
                 this.min = 0;
                 this.max = 100; 
-                // user didn't specify number of ticks.
+                // patternrecognition didn't specify number of ticks.
                 if (!this.numberTicks){
                     if (this.tickInterval) {
                         this.numberTicks = 3 + Math.ceil(range / this.tickInterval);
@@ -338,7 +338,7 @@
                     }
                 }
                 
-                // user did specify number of ticks.
+                // patternrecognition did specify number of ticks.
                 else {
                     this.tickInterval = range / (this.numberTicks - 1);
                 }
@@ -392,7 +392,7 @@
                 }
                 this.max = this.max || temp;
                 
-                // if user specified a max and it is greater than sum, add a tick
+                // if patternrecognition specified a max and it is greater than sum, add a tick
                 if (this.max > temp) {
                      t = new this.tickRenderer(this.tickOptions);
                     if (!this.showTicks) {

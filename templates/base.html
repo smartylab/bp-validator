@@ -4,17 +4,22 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>INFaaS Console</title>
+    <title>BP Validity Tester</title>
 
     <script src="{% static "lib/jquery-1.11.1.min.js" %}"></script>
     <script src="{% static "lib/jquery-ui-1.11.2/jquery-ui.min.js" %}"></script>
     <script>$(function () {});</script>
-    <script src="{% static "lib/Chart.js/Chart.min.js" %}"></script>
+    <script src="{% static "lib/jqplot/jquery.jqplot.min.js" %}"></script>
+    <script src="{% static "lib/jqplot/plugins/jqplot.canvasTextRenderer.min.js" %}"></script>
+    <script src="{% static "lib/jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js" %}"></script>
 
     <link rel="stylesheet" href="{% static "lib/jquery-ui-1.11.2/jquery-ui.min.css" %}"/>
+    <link rel="stylesheet" href="{% static "lib/jqplot/plugins/jqplot.canvasTextRenderer.min.js" %}"/>
+    <link rel="stylesheet" href="{% static "lib/jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js" %}"/>
     <link rel="stylesheet" href="{% static "lib/jqplot/jquery.jqplot.min.css" %}"/>
     <link rel="stylesheet" href="{% static "css/layout.css" %}"/>
     <link rel="stylesheet" href="{% static "css/style.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/img.css" %}"/>
 
     {% block stylesheets %}
     {% endblock %}
@@ -30,11 +35,11 @@
     <div class="layout-main right">
         {% block main %}{% endblock %}
     </div>
-    <div class="layout-footer">
-        {% block footer %}{% endblock %}
-    </div>
 </div>
-
+<div class="clear"></div>
+<div class="layout-footer">
+    {% block footer %}{% endblock %}
+</div>
 {% block scripts %}
 {% endblock %}
 </body>

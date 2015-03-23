@@ -185,7 +185,7 @@
         var i;
         var l;
         var s;
-        // get a copy of user's settings for min/max.
+        // get a copy of patternrecognition's settings for min/max.
         var userMin = this.min;
         var userMax = this.max;
         var ut;
@@ -240,7 +240,7 @@
             this.max = this._ticks[this.numberTicks-1].value;
             this.tickInterval = (this.max - this.min) / (this.numberTicks - 1);
 
-            // use user specified tickInterval if there is one
+            // use patternrecognition specified tickInterval if there is one
             if (this._options.tickInterval) {
                 // hide every tick except for ticks on interval
                 var ti = this._options.tickInterval;

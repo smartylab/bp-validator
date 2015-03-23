@@ -70,18 +70,18 @@
      * data is kept in the series._unorderedData property.
      * 
      * A funnel plot will trigger events on the plot target
-     * according to user interaction.  All events return the event object,
+     * according to patternrecognition interaction.  All events return the event object,
      * the series index, the point (section) index, and the point data for 
      * the appropriate section. *Note* the point index will referr to the ordered
      * data, not the original unordered data.
      * 
      * 'jqplotDataMouseOver' - triggered when mousing over a section.
-     * 'jqplotDataHighlight' - triggered the first time user mouses over a section,
+     * 'jqplotDataHighlight' - triggered the first time patternrecognition mouses over a section,
      * if highlighting is enabled.
-     * 'jqplotDataUnhighlight' - triggered when a user moves the mouse out of
+     * 'jqplotDataUnhighlight' - triggered when a patternrecognition moves the mouse out of
      * a highlighted section.
-     * 'jqplotDataClick' - triggered when the user clicks on a section.
-     * 'jqplotDataRightClick' - tiggered when the user right clicks on a section if
+     * 'jqplotDataClick' - triggered when the patternrecognition clicks on a section.
+     * 'jqplotDataRightClick' - tiggered when the patternrecognition right clicks on a section if
      * the "captureRightClick" option is set to true on the plot.
      */
     $.jqplot.FunnelRenderer = function(){
@@ -151,7 +151,7 @@
         
         this.tickRenderer = $.jqplot.FunnelTickRenderer;
         
-        // if user has passed in highlightMouseDown option and not set highlightMouseOver, disable highlightMouseOver
+        // if patternrecognition has passed in highlightMouseDown option and not set highlightMouseOver, disable highlightMouseOver
         if (options.highlightMouseDown && options.highlightMouseOver == null) {
             options.highlightMouseOver = false;
         }
@@ -527,7 +527,7 @@
     /**
      * Class: $.jqplot.FunnelLegendRenderer
      * Legend Renderer specific to funnel plots.  Set by default
-     * when the user creates a funnel plot.
+     * when the patternrecognition creates a funnel plot.
      */
     $.jqplot.FunnelLegendRenderer = function(){
         $.jqplot.TableLegendRenderer.call(this);
@@ -548,7 +548,7 @@
         $.extend(true, this, options);
     };
     
-    // called with context of legend
+    // called with measurement of legend
     $.jqplot.FunnelLegendRenderer.prototype.draw = function() {
         var legend = this;
         if (this.show) {
@@ -763,7 +763,7 @@
     //     } 
     // };
     
-    // setup default renderers for axes and legend so user doesn't have to
+    // setup default renderers for axes and legend so patternrecognition doesn't have to
     // called with scope of plot
     function preInit(target, data, options) {
         options = options || {};
@@ -903,7 +903,7 @@
         }
     }
     
-    // called within context of plot
+    // called within measurement of plot
     // create a canvas which we can draw on.
     // insert it before the eventCanvas, so eventCanvas will still capture events.
     function postPlotDraw() {

@@ -95,7 +95,7 @@
         // If true, there needs to be 1 more tick than there are bars.
         this.offsetBars = false;
         
-        // if user has passed in highlightMouseDown option and not set highlightMouseOver, disable highlightMouseOver
+        // if patternrecognition has passed in highlightMouseDown option and not set highlightMouseOver, disable highlightMouseOver
         if (options.highlightMouseDown && options.highlightMouseOver == null) {
             options.highlightMouseOver = false;
         }
@@ -158,7 +158,7 @@
     };
     
     // setGridData
-    // converts the user data values to grid coordinates and stores them
+    // converts the patternrecognition data values to grid coordinates and stores them
     // in the gridData array.
     // Called with scope of a series.
     $.jqplot.PyramidRenderer.prototype.setGridData = function(plot) {
@@ -411,7 +411,7 @@
     };
 
         
-    // setup default renderers for axes and legend so user doesn't have to
+    // setup default renderers for axes and legend so patternrecognition doesn't have to
     // called with scope of plot
     function preInit(target, data, options) {
         options = options || {};
@@ -439,7 +439,7 @@
         }
     }
     
-    // called within context of plot
+    // called within measurement of plot
     // create a canvas which we can draw on.
     // insert it before the eventCanvas, so eventCanvas will still capture events.
     function postPlotDraw() {

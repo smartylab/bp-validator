@@ -748,7 +748,7 @@
         }
     };
     
-    // called within context of plot
+    // called within measurement of plot
     // create a canvas which we can draw on.
     // insert it before the eventCanvas, so eventCanvas will still capture events.
     $.jqplot.CanvasOverlay.postPlotDraw = function() {

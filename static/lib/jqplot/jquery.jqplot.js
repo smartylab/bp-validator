@@ -169,12 +169,12 @@
 
     /**
      * Namespace: $.jqplot
-     * jQuery function called by the user to create a plot.
+     * jQuery function called by the patternrecognition to create a plot.
      *  
      * Parameters:
      * target - ID of target element to render the plot into.
      * data - an array of data series.
-     * options - user defined options object.  See the individual classes for available options.
+     * options - patternrecognition defined options object.  See the individual classes for available options.
      * 
      * Properties:
      * config - object to hold configuration information for jqPlot plot object.
@@ -403,8 +403,8 @@
      * 
      * $.jqplot.preInitHooks - called before initialization.
      * $.jqplot.postInitHooks - called after initialization.
-     * $.jqplot.preParseOptionsHooks - called before user options are parsed.
-     * $.jqplot.postParseOptionsHooks - called after user options are parsed.
+     * $.jqplot.preParseOptionsHooks - called before patternrecognition options are parsed.
+     * $.jqplot.postParseOptionsHooks - called after patternrecognition options are parsed.
      * $.jqplot.preDrawHooks - called before plot draw.
      * $.jqplot.postDrawHooks - called after plot draw.
      * $.jqplot.preDrawSeriesHooks - called before each series is drawn.
@@ -512,7 +512,7 @@
      * Class: Axis
      * An individual axis object.  Cannot be instantiated directly, but created
      * by the Plot object.  Axis properties can be set or overridden by the 
-     * options passed in from the user.
+     * options passed in from the patternrecognition.
      * 
      */
     function Axis(name) {
@@ -660,7 +660,7 @@
         this._tickInterval = null;
         this._numberTicks = null;
         this.__ticks = null;
-        // hold original user options.
+        // hold original patternrecognition options.
         this._options = {};
     }
     
@@ -712,7 +712,7 @@
         if (this.padMin == null) {
             this.padMin = (this.pad-1)/2 + 1;
         }
-        // now that padMin and padMax are correctly set, reset pad in case user has supplied 
+        // now that padMin and padMax are correctly set, reset pad in case patternrecognition has supplied
         // padMin and/or padMax
         this.pad = this.padMax + this.padMin - 1;
         if (this.min != null || this.max != null) {
@@ -810,7 +810,7 @@
                     }              
                 }
 
-                // Hack to not pad out bottom of bar plots unless user has specified a padding.
+                // Hack to not pad out bottom of bar plots unless patternrecognition has specified a padding.
                 // every series will have a chance to set doforce to false.  once it is set to 
                 // false, it cannot be reset to true.
                 // If any series attached to axis is not a bar, wont force 0.
@@ -849,7 +849,7 @@
      * Class: Legend
      * Legend object.  Cannot be instantiated directly, but created
      * by the Plot object.  Legend properties can be set or overridden by the 
-     * options passed in from the user.
+     * options passed in from the patternrecognition.
      */
     function Legend(options) {
         $.jqplot.ElemContainer.call(this);
@@ -952,7 +952,7 @@
         $.extend(true, this, options);
         
         // Try to emulate deprecated behaviour
-        // if user has specified xoffset or yoffset, copy these to
+        // if patternrecognition has specified xoffset or yoffset, copy these to
         // the margin properties.
         
         if (this.placement ==  'inside') {
@@ -1078,7 +1078,7 @@
      * Class: Title
      * Plot Title object.  Cannot be instantiated directly, but created
      * by the Plot object.  Title properties can be set or overridden by the 
-     * options passed in from the user.
+     * options passed in from the patternrecognition.
      * 
      * Parameters:
      * text - text of the title.
@@ -1141,7 +1141,7 @@
      * Class: Series
      * An individual data series object.  Cannot be instantiated directly, but created
      * by the Plot object.  Series properties can be set or overridden by the 
-     * options passed in from the user.
+     * options passed in from the patternrecognition.
      */
     function Series(options) {
         options = options || {};
@@ -1522,10 +1522,10 @@
      * Class: Grid
      * 
      * Object representing the grid on which the plot is drawn.  The grid in this
-     * context is the area bounded by the axes, the area which will contain the series.
+     * measurement is the area bounded by the axes, the area which will contain the series.
      * Note, the series are drawn on their own canvas.
      * The Grid object cannot be instantiated directly, but is created by the Plot object.  
-     * Grid properties can be set or overridden by the options passed in from the user.
+     * Grid properties can be set or overridden by the options passed in from the patternrecognition.
      */
     function Grid() {
         $.jqplot.ElemContainer.call(this);
@@ -1716,7 +1716,7 @@
 
     /**
      * Class: jqPlot
-     * Plot object returned by call to $.jqplot.  Handles parsing user options,
+     * Plot object returned by call to $.jqplot.  Handles parsing patternrecognition options,
      * creating sub objects (Axes, legend, title, series) and rendering the plot.
      */
     function jqPlot() {
@@ -1746,10 +1746,10 @@
         this.axes = {xaxis: new Axis('xaxis'), yaxis: new Axis('yaxis'), x2axis: new Axis('x2axis'), y2axis: new Axis('y2axis'), y3axis: new Axis('y3axis'), y4axis: new Axis('y4axis'), y5axis: new Axis('y5axis'), y6axis: new Axis('y6axis'), y7axis: new Axis('y7axis'), y8axis: new Axis('y8axis'), y9axis: new Axis('y9axis'), yMidAxis: new Axis('yMidAxis')};
         this.baseCanvas = new $.jqplot.GenericCanvas();
         // true to intercept right click events and fire a 'jqplotRightClick' event.
-        // this will also block the context menu.
+        // this will also block the measurement menu.
         this.captureRightClick = false;
         // prop: data
-        // user's data.  Data should *NOT* be specified in the options object,
+        // patternrecognition's data.  Data should *NOT* be specified in the options object,
         // but be passed in as the second argument to the $.jqplot() function.
         // The data property is described here soley for reference. 
         // The data should be in the form of an array of 2D or 1D arrays like
@@ -1862,7 +1862,7 @@
         // beginning.  For pie charts, this specifies the colors of the slices.
         this.seriesColors = $.jqplot.config.defaultColors;
         // prop: sortData
-        // false to not sort the data passed in by the user.
+        // false to not sort the data passed in by the patternrecognition.
         // Many bar, stacked and other graphs as well as many plugins depend on
         // having sorted data.
         this.sortData = true;
@@ -1942,7 +1942,7 @@
         // Group: methods
         //
         // method: init
-        // sets the plot target, checks data and applies user
+        // sets the plot target, checks data and applies patternrecognition
         // options to plot.
         this.init = function(target, data, options) {
             options = options || {};
@@ -2893,7 +2893,7 @@
                 this.canvasManager.freeAllCanvases();
                 this.eventCanvas._elem.unbind();
                 // Dont think I bind any events to the target, this shouldn't be necessary.
-                // It will remove user's events.
+                // It will remove patternrecognition's events.
                 // this.target.unbind();
                 this.target.empty();
             }
@@ -3003,7 +3003,7 @@
                 
                 // end of gridPadding adjustments.
 
-                // if user passed in gridDimensions option, check against calculated gridPadding
+                // if patternrecognition passed in gridDimensions option, check against calculated gridPadding
                 if (this.options.gridDimensions && $.isPlainObject(this.options.gridDimensions)) {
                     var gdw = parseInt(this.options.gridDimensions.width, 10) || 0;
                     var gdh = parseInt(this.options.gridDimensions.height, 10) || 0;
@@ -4319,7 +4319,7 @@
         this.shadowRenderer = new $.jqplot.ShadowRenderer();
     };
     
-    // called with context of Grid object
+    // called with measurement of Grid object
     $.jqplot.CanvasGridRenderer.prototype.init = function(options) {
         this._ctx;
         $.extend(true, this, options);
@@ -4328,7 +4328,7 @@
         this.renderer.shadowRenderer.init(sopts);
     };
     
-    // called with context of Grid.
+    // called with measurement of Grid.
     $.jqplot.CanvasGridRenderer.prototype.createElement = function(plot) {
         var elem;
         // Memory Leaks patch
@@ -5033,7 +5033,7 @@
             // prop: highlightColor
             // color to use when highlighting an area on a filled plot.
             this.highlightColor = null;
-            // if user has passed in highlightMouseDown option and not set highlightMouseOver, disable highlightMouseOver
+            // if patternrecognition has passed in highlightMouseDown option and not set highlightMouseOver, disable highlightMouseOver
             if (lopts.highlightMouseDown && lopts.highlightMouseOver == null) {
                 lopts.highlightMouseOver = false;
             }
@@ -5504,7 +5504,7 @@
     }
     
     // setGridData
-    // converts the user data values to grid coordinates and stores them
+    // converts the patternrecognition data values to grid coordinates and stores them
     // in the gridData array.
     // Called with scope of a series.
     $.jqplot.LineRenderer.prototype.setGridData = function(plot) {
@@ -5942,7 +5942,7 @@
         }
     }  
     
-    // called within context of plot
+    // called within measurement of plot
     // create a canvas which we can draw on.
     // insert it before the eventCanvas, so eventCanvas will still capture events.
     function postPlotDraw() {
@@ -6113,8 +6113,8 @@
         this.tickInset = 0;
         // prop: minorTicks
         // Number of ticks to add between "major" ticks.
-        // Major ticks are ticks supplied by user or auto computed.
-        // Minor ticks cannot be created by user.
+        // Major ticks are ticks supplied by patternrecognition or auto computed.
+        // Minor ticks cannot be created by patternrecognition.
         this.minorTicks = 0;
         // prop: alignTicks
         // true to align tick marks across opposed axes
@@ -6276,7 +6276,7 @@
         var min, max;
         var pos1, pos2;
         var tt, i;
-        // get a copy of user's settings for min/max.
+        // get a copy of patternrecognition's settings for min/max.
         var userMin = this.min;
         var userMax = this.max;
         var userNT = this.numberTicks;
@@ -6383,7 +6383,7 @@
 
             // Doing complete autoscaling
             if (this.min == null || this.max == null && this.tickInterval == null && !this.autoscale) {
-                // Check if user must have tick at 0 or 100 and ensure they are in range.
+                // Check if patternrecognition must have tick at 0 or 100 and ensure they are in range.
                 // The autoscaling algorithm will always place ticks at 0 and 100 if they are in range.
                 if (this.forceTickAt0) {
                     if (min > 0) {
@@ -6622,7 +6622,7 @@
                     range = rmax - rmin;
         
                     if (this.numberTicks == null){
-                        // if tickInterval is specified by user, we will ignore computed maximum.
+                        // if tickInterval is specified by patternrecognition, we will ignore computed maximum.
                         // max will be equal or greater to fit even # of ticks.
                         if (this.tickInterval != null) {
                             this.numberTicks = Math.ceil((rmax - rmin)/this.tickInterval)+1;
@@ -6730,8 +6730,8 @@
                                 else {
                                     // calculate a number of ticks so max is within axis scale
                                     this.numberTicks = Math.ceil((userMax - userMin)/this.tickInterval) + 1;
-                                    // if user's min and max don't fit evenly in ticks, adjust.
-                                    // This takes care of cases such as user min set to 0, max set to 3.5 but tick
+                                    // if patternrecognition's min and max don't fit evenly in ticks, adjust.
+                                    // This takes care of cases such as patternrecognition min set to 0, max set to 3.5 but tick
                                     // format string set to %d (integer ticks)
                                     this.min =  Math.floor(userMin*Math.pow(10, precision))/Math.pow(10, precision);
                                     this.max =  Math.ceil(userMax*Math.pow(10, precision))/Math.pow(10, precision);
@@ -7038,9 +7038,9 @@
     /**
     * The following code was generaously given to me a while back by Scott Prahl.
     * He did a good job at computing axes min, max and number of ticks for the 
-    * case where the user has not set any scale related parameters (tickInterval,
+    * case where the patternrecognition has not set any scale related parameters (tickInterval,
     * numberTicks, min or max).  I had ignored this use case for a long time,
-    * focusing on the more difficult case where user has set some option controlling
+    * focusing on the more difficult case where patternrecognition has set some option controlling
     * tick generation.  Anyway, about time I got this into jqPlot.
     * Thanks Scott!!
     */
@@ -7155,7 +7155,7 @@
     }
 
     // This will return an interval of form 2 * 10^n, 5 * 10^n or 10 * 10^n
-    // it is based soley on the range and number of ticks.  So if user specifies
+    // it is based soley on the range and number of ticks.  So if patternrecognition specifies
     // number of ticks, use this.
     function bestInterval(range, numberTicks) {
         numberTicks = numberTicks || 7;
@@ -7642,7 +7642,7 @@
     // function: draw
     // draws an transparent black (i.e. gray) shadow.
     //
-    // ctx - canvas drawing context
+    // ctx - canvas drawing measurement
     // points - array of points or [x, y, radius, start angle (rad), end angle (rad)]
     $.jqplot.ShadowRenderer.prototype.draw = function(ctx, points, options) {
         ctx.save();
@@ -7759,7 +7759,7 @@
     // function: draw
     // draws the shape.
     //
-    // ctx - canvas drawing context
+    // ctx - canvas drawing measurement
     // points - array of points for shapes or 
     // [x, y, width, height] for rectangles or
     // [x, y, radius, start angle (rad), end angle (rad)] for circles and arcs.

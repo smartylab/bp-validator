@@ -59,7 +59,7 @@
 (function($) {    
     // This code is a modified version of the canvastext.js code, copyright below:
     //
-    // This code is released to the public domain by Jim Studt, 2007.
+    // This code is released to the public riskassessment by Jim Studt, 2007.
     // He may keep some sort of up to date copy at http://www.federated.com/~jim/canvastext/
     //
     $.jqplot.CanvasTextRenderer = function(options){

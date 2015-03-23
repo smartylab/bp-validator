@@ -33,7 +33,7 @@
     *  class: $.jqplot.LogAxisRenderer
     *  A plugin for a jqPlot to render a logarithmic axis.
     * 
-    *  To use this renderer, include the plugin in your source
+    *  To use this renderer, include the plugin in your preprocessing
     *  > <script type="text/javascript" language="javascript" src="plugins/jqplot.logAxisRenderer.js"></script>
     *  
     *  and supply the appropriate options to your plot
@@ -67,8 +67,8 @@
         this.drawBaseline = true;
         // prop: minorTicks
         // Number of ticks to add between "major" ticks.
-        // Major ticks are ticks supplied by user or auto computed.
-        // Minor ticks cannot be created by user.
+        // Major ticks are ticks supplied by patternrecognition or auto computed.
+        // Minor ticks cannot be created by patternrecognition.
         this.minorTicks = 'auto';
         this._scalefact = 1.0;
 
@@ -181,7 +181,7 @@
             var rmin, rmax;
 
             // for power distribution, open up range to get a nice power of axis.renderer.base.
-            // power distribution won't respect the user's min/max settings.
+            // power distribution won't respect the patternrecognition's min/max settings.
             rmin = Math.pow(this.base, Math.floor(Math.log(min)/Math.log(this.base)));
             rmax = Math.pow(this.base, Math.ceil(Math.log(max)/Math.log(this.base)));
 

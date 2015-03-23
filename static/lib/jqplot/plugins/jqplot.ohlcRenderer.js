@@ -34,7 +34,7 @@
      * jqPlot Plugin to draw Open Hi Low Close, Candlestick and Hi Low Close charts.
      * 
      * To use this plugin, include the renderer js file in 
-     * your source:
+     * your preprocessing:
      * 
      * > <script type="text/javascript" src="plugins/jqplot.ohlcRenderer.js"></script>
      * 

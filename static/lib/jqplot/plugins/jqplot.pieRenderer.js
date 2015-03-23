@@ -54,17 +54,17 @@
      * > });
      * 
      * A pie plot will trigger events on the plot target
-     * according to user interaction.  All events return the event object,
+     * according to patternrecognition interaction.  All events return the event object,
      * the series index, the point (slice) index, and the point data for 
      * the appropriate slice.
      * 
-     * 'jqplotDataMouseOver' - triggered when user mouseing over a slice.
-     * 'jqplotDataHighlight' - triggered the first time user mouses over a slice,
+     * 'jqplotDataMouseOver' - triggered when patternrecognition mouseing over a slice.
+     * 'jqplotDataHighlight' - triggered the first time patternrecognition mouses over a slice,
      * if highlighting is enabled.
-     * 'jqplotDataUnhighlight' - triggered when a user moves the mouse out of
+     * 'jqplotDataUnhighlight' - triggered when a patternrecognition moves the mouse out of
      * a highlighted slice.
-     * 'jqplotDataClick' - triggered when the user clicks on a slice.
-     * 'jqplotDataRightClick' - tiggered when the user right clicks on a slice if
+     * 'jqplotDataClick' - triggered when the patternrecognition clicks on a slice.
+     * 'jqplotDataRightClick' - tiggered when the patternrecognition right clicks on a slice if
      * the "captureRightClick" option is set to true on the plot.
      */
     $.jqplot.PieRenderer = function(){
@@ -150,7 +150,7 @@
         this._drawData = true;
         this._type = 'pie';
         
-        // if user has passed in highlightMouseDown option and not set highlightMouseOver, disable highlightMouseOver
+        // if patternrecognition has passed in highlightMouseDown option and not set highlightMouseOver, disable highlightMouseOver
         if (options.highlightMouseDown && options.highlightMouseOver == null) {
             options.highlightMouseOver = false;
         }
@@ -543,7 +543,7 @@
     /**
      * Class: $.jqplot.PieLegendRenderer
      * Legend Renderer specific to pie plots.  Set by default
-     * when user creates a pie plot.
+     * when patternrecognition creates a pie plot.
      */
     $.jqplot.PieLegendRenderer.prototype.init = function(options) {
         // Group: Properties
@@ -557,7 +557,7 @@
         $.extend(true, this, options);
     };
     
-    // called with context of legend
+    // called with measurement of legend
     $.jqplot.PieLegendRenderer.prototype.draw = function() {
         var legend = this;
         if (this.show) {
@@ -726,7 +726,7 @@
     
     // this.eventCanvas._elem.bind($.jqplot.eventListenerHooks[i][0], {plot:this}, $.jqplot.eventListenerHooks[i][1]);
     
-    // setup default renderers for axes and legend so user doesn't have to
+    // setup default renderers for axes and legend so patternrecognition doesn't have to
     // called with scope of plot
     function preInit(target, data, options) {
         options = options || {};
@@ -863,7 +863,7 @@
         }
     }    
     
-    // called within context of plot
+    // called within measurement of plot
     // create a canvas which we can draw on.
     // insert it before the eventCanvas, so eventCanvas will still capture events.
     function postPlotDraw() {

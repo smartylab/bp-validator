@@ -175,3 +175,7 @@ table tr.active, table td.active {
 table.noborder, table.noborder th, table.noborder tr, table.noborder td {
     border: none;
 }
+
+.space {
+    margin:10px;
+}

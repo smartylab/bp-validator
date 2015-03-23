@@ -43,7 +43,7 @@
 
     
     // Method: setGridData
-    // converts the user data values to grid coordinates and stores them
+    // converts the patternrecognition data values to grid coordinates and stores them
     // in the gridData array.
     // Called with scope of a series.
     $.jqplot.BezierCurveRenderer.prototype.setGridData = function(plot) {
@@ -284,7 +284,7 @@
         }
     };
     
-    // setup default renderers for axes and legend so user doesn't have to
+    // setup default renderers for axes and legend so patternrecognition doesn't have to
     // called with scope of plot
     function preInit(target, data, options) {
         options = options || {};

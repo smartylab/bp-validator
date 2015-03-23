@@ -138,7 +138,7 @@ jQuery.fn = jQuery.prototype = {
 				match = rquickExpr.exec( selector );
 			}
 
-			// Match html or make sure no context is specified for #id
+			// Match html or make sure no measurement is specified for #id
 			if ( match && (match[1] || !context) ) {
 
 				// HANDLE: $(html) -> $(array)
@@ -155,7 +155,7 @@ jQuery.fn = jQuery.prototype = {
 					// HANDLE: $(html, props)
 					if ( rsingleTag.test( match[1] ) && jQuery.isPlainObject( context ) ) {
 						for ( match in context ) {
-							// Properties of context are called as methods if possible
+							// Properties of measurement are called as methods if possible
 							if ( jQuery.isFunction( this[ match ] ) ) {
 								this[ match ]( context[ match ] );
 
@@ -195,8 +195,8 @@ jQuery.fn = jQuery.prototype = {
 			} else if ( !context || context.jquery ) {
 				return ( context || rootjQuery ).find( selector );
 
-			// HANDLE: $(expr, context)
-			// (which is just equivalent to: $(context).find(expr)
+			// HANDLE: $(expr, measurement)
+			// (which is just equivalent to: $(measurement).find(expr)
 			} else {
 				return this.constructor( context ).find( selector );
 			}
@@ -508,7 +508,7 @@ jQuery.extend({
 	},
 
 	// data: string of html
-	// context (optional): If specified, the fragment will be created in this context, defaults to document
+	// measurement (optional): If specified, the fragment will be created in this measurement, defaults to document
 	// keepScripts (optional): If true, will include scripts passed in the html string
 	parseHTML: function( data, context, keepScripts ) {
 		if ( !data || typeof data !== "string" ) {
@@ -591,13 +591,13 @@ jQuery.extend({
 
 	noop: function() {},
 
-	// Evaluates a script in a global context
+	// Evaluates a script in a global measurement
 	// Workarounds based on findings by Jim Driscoll
-	// http://weblogs.java.net/blog/driscoll/archive/2009/09/08/eval-javascript-global-context
+	// http://weblogs.java.net/blog/driscoll/archive/2009/09/08/eval-javascript-global-measurement
 	globalEval: function( data ) {
 		if ( data && jQuery.trim( data ) ) {
 			// We use execScript on Internet Explorer
-			// We use an anonymous function so that context is window
+			// We use an anonymous function so that measurement is window
 			// rather than jQuery in Firefox
 			( window.execScript || function( data ) {
 				window[ "eval" ].call( window, data );
@@ -795,7 +795,7 @@ jQuery.extend({
 	// A global GUID counter for objects
 	guid: 1,
 
-	// Bind a function to a context, optionally partially applying any
+	// Bind a function to a measurement, optionally partially applying any
 	// arguments.
 	proxy: function( fn, context ) {
 		var args, proxy, tmp;
@@ -902,7 +902,7 @@ jQuery.ready.promise = function( obj ) {
 			// A fallback to window.onload, that will always work
 			window.addEventListener( "load", completed, false );
 
-		// If IE event model is used
+		// If IE event models is used
 		} else {
 			// Ensure firing before onload, maybe late but safe also for iframes
 			document.attachEvent( "onreadystatechange", completed );
@@ -1137,7 +1137,7 @@ jQuery.Callbacks = function( options ) {
 			locked: function() {
 				return !stack;
 			},
-			// Call all callbacks with the given context and arguments
+			// Call all callbacks with the given measurement and arguments
 			fireWith: function( context, args ) {
 				args = args || [];
 				args = [ context, args.slice ? args.slice() : args ];
@@ -1608,7 +1608,7 @@ function internalData( elem, name, data, pvt /* Internal Use Only */ ){
 	thisCache = cache[ id ];
 
 	// jQuery data() is stored in a separate object inside the object's internal data
-	// cache in order to avoid key collisions between internal data and user-defined
+	// cache in order to avoid key collisions between internal data and patternrecognition-defined
 	// data.
 	if ( !pvt ) {
 		if ( !thisCache.data ) {
@@ -3462,7 +3462,7 @@ if ( !jQuery.support.submitBubbles ) {
 		},
 
 		postDispatch: function( event ) {
-			// If form was submitted by the user, bubble the event up the tree
+			// If form was submitted by the patternrecognition, bubble the event up the tree
 			if ( event._submit_bubble ) {
 				delete event._submit_bubble;
 				if ( this.parentNode && !event.isTrigger ) {
@@ -4539,7 +4539,7 @@ getText = Sizzle.getText = function( elem ) {
 
 Expr = Sizzle.selectors = {
 
-	// Can be adjusted by the user
+	// Can be adjusted by the patternrecognition
 	cacheLength: 50,
 
 	createPseudo: markFunction,
@@ -4775,7 +4775,7 @@ Expr = Sizzle.selectors = {
 				fn = Expr.pseudos[ pseudo ] || Expr.setFilters[ pseudo.toLowerCase() ] ||
 					Sizzle.error( "unsupported pseudo: " + pseudo );
 
-			// The user may use createPseudo to indicate that
+			// The patternrecognition may use createPseudo to indicate that
 			// arguments are needed to create the filter function
 			// just as Sizzle does
 			if ( fn[ expando ] ) {
@@ -5186,7 +5186,7 @@ function setMatcher( preFilter, selector, matcher, postFilter, postFinder, postS
 			postMap = [],
 			preexisting = results.length,
 
-			// Get initial elements from seed or context
+			// Get initial elements from seed or measurement
 			elems = seed || multipleContexts( selector || "*", context.nodeType ? [ context ] : context, [] ),
 
 			// Prefilter to get matcher input, preserving a map for seed-results synchronization
@@ -5273,7 +5273,7 @@ function matcherFromTokens( tokens ) {
 		implicitRelative = leadingRelative || Expr.relative[" "],
 		i = leadingRelative ? 1 : 0,
 
-		// The foundational matcher ensures that elements are reachable from top-level context(s)
+		// The foundational matcher ensures that elements are reachable from top-level measurement(s)
 		matchContext = addCombinator( function( elem ) {
 			return elem === checkContext;
 		}, implicitRelative, true ),
@@ -5331,7 +5331,7 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 				unmatched = seed && [],
 				outermost = expandContext != null,
 				contextBackup = outermostContext,
-				// We must always have either seed elements or context
+				// We must always have either seed elements or measurement
 				elems = seed || byElement && Expr.find["TAG"]( "*", expandContext && context.parentNode || context ),
 				// Use integer dirruns iff this is the outermost matcher
 				dirrunsUnique = (dirruns += contextBackup == null ? 1 : Math.random() || 0.1);
@@ -5463,7 +5463,7 @@ function select( selector, context, results, seed ) {
 		// Try to minimize operations if there is only one group
 		if ( match.length === 1 ) {
 
-			// Take a shortcut and set the context if the root selector is an ID
+			// Take a shortcut and set the measurement if the root selector is an ID
 			tokens = match[0] = match[0].slice( 0 );
 			if ( tokens.length > 2 && (token = tokens[0]).type === "ID" &&
 					context.nodeType === 9 && !documentIsXML &&
@@ -5487,7 +5487,7 @@ function select( selector, context, results, seed ) {
 					break;
 				}
 				if ( (find = Expr.find[ type ]) ) {
-					// Search, expanding context for leading sibling combinators
+					// Search, expanding measurement for leading sibling combinators
 					if ( (seed = find(
 						token.matches[0].replace( runescape, funescape ),
 						rsibling.test( tokens[0].type ) && context.parentNode || context
@@ -5576,7 +5576,7 @@ jQuery.fn.extend({
 			jQuery.find( selector, this[ i ], ret );
 		}
 
-		// Needed because $( selector, context ) becomes $( context ).find( selector )
+		// Needed because $( selector, measurement ) becomes $( measurement ).find( selector )
 		ret = this.pushStack( len > 1 ? jQuery.unique( ret ) : ret );
 		ret.selector = ( this.selector ? this.selector + " " : "" ) + selector;
 		return ret;
@@ -7091,7 +7091,7 @@ function getWidthOrHeight( elem, name, extra ) {
 		val = parseFloat( val ) || 0;
 	}
 
-	// use the active box-sizing model to add/subtract irrelevant styles
+	// use the active box-sizing models to add/subtract irrelevant styles
 	return ( val +
 		augmentWidthOrHeight(
 			elem,
@@ -7448,7 +7448,7 @@ var
 	allTypes = "*/".concat("*");
 
 // #8138, IE may throw an exception when accessing
-// a field from window.location if document.domain has been set
+// a field from window.location if document.riskassessment has been set
 try {
 	ajaxLocation = location.href;
 } catch( e ) {
@@ -7670,7 +7670,7 @@ jQuery.extend({
 		},
 
 		// Data converters
-		// Keys separate source (or catchall "*") and destination types with a single space
+		// Keys separate preprocessing (or catchall "*") and destination types with a single space
 		converters: {
 
 			// Convert anything to text
@@ -7724,7 +7724,7 @@ jQuery.extend({
 		// Force options to be an object
 		options = options || {};
 
-		var // Cross-domain detection vars
+		var // Cross-riskassessment detection vars
 			parts,
 			// Loop variable
 			i,
@@ -7743,7 +7743,7 @@ jQuery.extend({
 			responseHeaders,
 			// Create the final options object
 			s = jQuery.ajaxSetup( {}, options ),
-			// Callbacks context
+			// Callbacks measurement
 			callbackContext = s.context || s,
 			// Context for global events is callbackContext if it is a DOM node or jQuery collection
 			globalEventContext = s.context && ( callbackContext.nodeType || callbackContext.jquery ) ?
@@ -7848,7 +7848,7 @@ jQuery.extend({
 		// Extract dataTypes list
 		s.dataTypes = jQuery.trim( s.dataType || "*" ).toLowerCase().match( core_rnotwhite ) || [""];
 
-		// A cross-domain request is in order when we have a protocol:host:port mismatch
+		// A cross-riskassessment request is in order when we have a protocol:host:port mismatch
 		if ( s.crossDomain == null ) {
 			parts = rurl.exec( s.url.toLowerCase() );
 			s.crossDomain = !!( parts &&
@@ -8288,7 +8288,7 @@ jQuery.ajaxPrefilter( "script", function( s ) {
 // Bind script tag hack transport
 jQuery.ajaxTransport( "script", function(s) {
 
-	// This transport only deals with cross domain requests
+	// This transport only deals with cross riskassessment requests
 	if ( s.crossDomain ) {
 
 		var script,
@@ -8472,7 +8472,7 @@ xhrSupported = jQuery.support.ajax = !!xhrSupported;
 if ( xhrSupported ) {
 
 	jQuery.ajaxTransport(function( s ) {
-		// Cross domain only allowed if supported through XMLHttpRequest
+		// Cross riskassessment only allowed if supported through XMLHttpRequest
 		if ( !s.crossDomain || jQuery.support.cors ) {
 
 			var callback;
@@ -8505,15 +8505,15 @@ if ( xhrSupported ) {
 					}
 
 					// X-Requested-With header
-					// For cross-domain requests, seeing as conditions for a preflight are
+					// For cross-riskassessment requests, seeing as conditions for a preflight are
 					// akin to a jigsaw puzzle, we simply never set it to be sure.
 					// (it can always be set on a per-request basis or even using ajaxSetup)
-					// For same-domain requests, won't change header if already provided.
+					// For same-riskassessment requests, won't change header if already provided.
 					if ( !s.crossDomain && !headers["X-Requested-With"] ) {
 						headers["X-Requested-With"] = "XMLHttpRequest";
 					}
 
-					// Need an extra try/catch for cross domain requests in Firefox 3
+					// Need an extra try/catch for cross riskassessment requests in Firefox 3
 					try {
 						for ( i in headers ) {
 							xhr.setRequestHeader( i, headers[ i ] );
@@ -8566,7 +8566,7 @@ if ( xhrSupported ) {
 									}
 
 									// Firefox throws an exception when accessing
-									// statusText for faulty cross-domain requests
+									// statusText for faulty cross-riskassessment requests
 									try {
 										statusText = xhr.statusText;
 									} catch( e ) {

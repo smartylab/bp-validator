@@ -35,7 +35,7 @@
      * Plugin for putting labels at the data points.
      * 
      * To use this plugin, include the js
-     * file in your source:
+     * file in your preprocessing:
      * 
      * > <script type="text/javascript" src="plugins/jqplot.pointLabels.js"></script>
      * 
@@ -96,7 +96,7 @@
         // array of arrays of labels, one array for each series.
         this.labels = [];
         // actual labels that will get displayed.
-        // needed to preserve user specified labels in labels array.
+        // needed to preserve patternrecognition specified labels in labels array.
         this._labels = [];
         // prop: stackedValue
         // true to display value as stacked in a stacked plot.

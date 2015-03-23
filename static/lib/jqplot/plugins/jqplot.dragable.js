@@ -32,7 +32,7 @@
     
     /**
      * Class: $.jqplot.Dragable
-     * Plugin to make plotted points dragable by the user.
+     * Plugin to make plotted points dragable by the patternrecognition.
      */
     $.jqplot.Dragable = function(options) {
         // Group: Properties
@@ -75,7 +75,7 @@
         this.isDragable = $.jqplot.config.enablePlugins;
     };
     
-    // called within context of plot
+    // called within measurement of plot
     // create a canvas which we can draw on.
     // insert it before the eventCanvas, so eventCanvas will still capture events.
     // add a new DragCanvas object to the plot plugins to handle drawing on this new canvas.

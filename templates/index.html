@@ -1,87 +1,219 @@
 {% extends "base_default.html" %}
 
-{% block stylesheets %}
+{% load static from staticfiles %}
+
+{% block stylesheets %} {{ block.super }}
     <style>
-        a.more {
-            font-size: 10pt;
-            margin: 0px 10px 0px 0px;
+        .box {
+            border: 1px solid #bfbfbf;
+            margin: 10px 0px auto;
+            padding: 10px;
+            width:75%;
         }
     </style>
 {% endblock %}
 
 {% block main %}
+
+    {% if not result %}
     <div class="layout-root center">
-        <div class="col1">
-            <h1>Dashboard</h1>
+        <div class="space" style="margin:30px"></div>
+        <div class="box center">
+            <form action="{% url 'test' %}"  method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                Business Process File: {{ form.docfile }}
+                <div class="right">
+                    <div class="left">Namespace: {{ form.appns }}</div>
+                    <button type="submit" class="left" style="margin-top:-3px;">Start Testing</button>
+                </div>
+            </form>
         </div>
-
-        <div class="col2 left">
-            <div class="content-container">
-                <div class="content-header">
-                    <h1 class="left">Context</h1>
-                    <a class="right more">More...</a>
-                </div>
-                <div class="content-body shadow clear">
-                    # of contexts: {{ context.num }}
-                </div>
-            </div>
-            <div class="content-container">
-                <div class="content-header">
-                    <h1 class="left">Solution</h1>
-                    <a class="right more">More...</a>
-                </div>
-                <div class="content-body shadow clear">
-                </div>
-            </div>
-
-            <div class="content-container">
-                <div class="content-header">
-                    <h1 class="left">User</h1>
-                    <a class="right more">More...</a>
-                </div>
-                <div class="content-body shadow clear">
-                </div>
-            </div>
-        </div>
-
-        <div class="col2 right">
-            <div class="content-container">
-                <div class="content-header">
-                    <h1 class="left">Source</h1>
-                    <a class="right more">More...</a>
-                </div>
-                <div class="content-body shadow clear">
-                </div>
-            </div>
-
-            <div class="content-container">
-                <div class="content-header">
-                    <h1 class="left">Domain</h1>
-                    <a class="right more">More...</a>
-                </div>
-                <div class="content-body shadow clear">
-                </div>
-            </div>
-
-            <div class="content-container">
-                <div class="content-header">
-                    <h1 class="left">Authority</h1>
-                    <a class="right more">More...</a>
-                </div>
-                <div class="content-body shadow clear">
-                </div>
-            </div>
-        </div>
-
-        <div class="col1 clear">
-            <div class="content-container">
-                <div class="content-header">
-                    <h1 class="left">Application</h1>
-                    <a class="right more">More...</a>
-                </div>
-                <div class="content-body shadow clear">
-                </div>
-            </div>
+        <div class="space" style="margin:30px"></div>
+    </div>
+    {% else %}
+    <div class="layout-root center">
+        <div class="space" style="margin:30px"></div>
+        <div class="box center">
+            Business Process File: {{ bp_file.name }} ({{ bp_file.size }} bytes)<br>
+            Namespace: {{ appns }}<br>
+            Testing Time: {{ testing_time }}
+            <button id="bt-done" class="right" style="margin-top:-24px">Done</button>
         </div>
     </div>
+    <div class="layout-root center">
+        <div class="col2 left">
+            <h3 align="center">Checking Required Elements</h3>
+            <table id="tb-validity-a" width="100%">
+                <tr><th>Item</th><th>Status</th><th>Description</th></tr>
+                <tr>
+                    <td id="cell-validity-a-1">Concert Adapter WSDL Importing</td>
+                    <td>
+                        {% if result.a1.status == 'valid' %}
+                            <div class="icon-good center"></div>
+                        {% elif result.a1.status %}
+                            <div class="icon-bad center"></div>
+                        {% else %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if result.a1.errors %}
+                        <ul>
+                        {% for e in result.a1.errors %}
+                            <li>{{ e }}</li>
+                        {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td id="cell-validity-a-2">Link Graph Assignment</td>
+                    <td>
+                        {% if result.a2.status == 'valid' %}
+                            <div class="icon-good center"></div>
+                        {% elif result.a2.status %}
+                            <div class="icon-bad center"></div>
+                        {% else %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if result.a2.errors %}
+                        <ul>
+                        {% for e in result.a2.errors %}
+                            <li>{{ e }}</li>
+                        {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td id="cell-validity-a-3">Concert Adapter Invocation</td>
+                    <td>
+                        {% if result.a3.status == 'valid' %}
+                            <div class="icon-good center"></div>
+                        {% elif result.a3.status %}
+                            <div class="icon-bad center"></div>
+                        {% else %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if result.a3.errors %}
+                        <ul>
+                        {% for e in result.a3.errors %}
+                            <li>{{ e }}</li>
+                        {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col2 right">
+            <h3 align="center">Checking Link Graphes</h3>
+            <table id="tb-validity-b" width="100%">
+                <tr><th>Item</th><th>Status</th><th>Description</th></tr>
+                <tr>
+                    <td id="cell-validity-b-1">Resources</td>
+                    <td>
+                        {% if result.b1.status == 'valid' %}
+                            <div class="icon-good center"></div>
+                        {% elif result.b1.status %}
+                            <div class="icon-bad center"></div>
+                        {% else %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if result.b1.errors %}
+                        <ul>
+                        {% for e in result.b1.errors %}
+                            <li>{{ e }}</li>
+                        {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td id="cell-validity-b-2">Topics</td>
+                    <td>
+                        {% if result.b2.status == 'valid' %}
+                            <div class="icon-good center"></div>
+                        {% elif result.b2.status %}
+                            <div class="icon-bad center"></div>
+                        {% else %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if result.b2.errors %}
+                        <ul>
+                        {% for e in result.b2.errors %}
+                            <li>{{ e }}</li>
+                        {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td id="cell-validity-b-3">Edges</td>
+                    <td>
+                        {% if result.b3.status == 'valid' %}
+                            <div class="icon-good center"></div>
+                        {% elif result.b3.status %}
+                            <div class="icon-bad center"></div>
+                        {% else %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if result.b3.errors %}
+                        <ul>
+                        {% for e in result.b3.errors %}
+                            <li>{{ e }}</li>
+                        {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block footer %}
+    <div align="center">
+        Copyright © 2015 <a href="http://smartylab.co.kr">Smarty Lab Inc.</a> All rights reserved.
+    </div>
+{% endblock %}
+
+{% block scripts %} {{ block.super }}
+    <script src="{% static "js/bp.js" %}"></script>
+    <script type="text/javascript">
+        (function ($) {
+            $("#bt-done").click(function() {
+                window.location = "/";
+            });
+
+            var $validityA1M = $("#cell-validity-a-1").next();
+            var $validityA1D = $validityA1M.next();
+            var $validityA2M = $("#cell-validity-a-2").next();
+            var $validityA2D = $validityA2M.next();
+            var $validityA3M = $("#cell-validity-a-3").next();
+            var $validityA3D = $validityA3M.next();
+            var $validityB1M = $("#cell-validity-b-1").next();
+            var $validityB1D = $validityB1M.next();
+            var $validityB2M = $("#cell-validity-b-2").next();
+            var $validityB2D = $validityB2M.next();
+            var $validityB3M = $("#cell-validity-b-3").next();
+            var $validityB3D = $validityB3M.next();
+
+            var $goodMark = $('<div class="icon-good center"></div>');
+            var $badMark = $('<div class="icon-bad center"></div>');
+
+            function setGood($cell) {
+                $cell.html($goodMark.clone());
+            }
+
+            function setBad($cell) {
+                $cell.html($badMark.clone());
+            }
+        })(jQuery);
+    </script>
 {% endblock %}

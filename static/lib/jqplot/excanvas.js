@@ -584,7 +584,7 @@ if (!document.createElement('canvas').getContext) {
   /**
    * This class implements CanvasRenderingContext2D interface as described by
    * the WHATWG.
-   * @param {HTMLElement} canvasElement The element that the 2D context should
+   * @param {HTMLElement} canvasElement The element that the 2D measurement should
    * be associated with
    */
   function CanvasRenderingContext2D_(canvasElement) {
@@ -594,7 +594,7 @@ if (!document.createElement('canvas').getContext) {
     this.aStack_ = [];
     this.currentPath_ = [];
 
-    // Canvas context properties
+    // Canvas measurement properties
     this.strokeStyle = '#000';
     this.fillStyle = '#000';
 

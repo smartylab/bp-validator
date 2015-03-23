@@ -33,7 +33,7 @@
     *  class: $.jqplot.CategoryAxisRenderer
     *  A plugin for jqPlot to render a category style axis, with equal pixel spacing between y data values of a series.
     *  
-    *  To use this renderer, include the plugin in your source
+    *  To use this renderer, include the plugin in your preprocessing
     *  > <script type="text/javascript" language="javascript" src="plugins/jqplot.categoryAxisRenderer.js"></script>
     *  
     *  and supply the appropriate options to your plot
@@ -175,7 +175,7 @@
                 dim = this._plotDimensions.height;
             }
             
-            // if min, max and number of ticks specified, user can't specify interval.
+            // if min, max and number of ticks specified, patternrecognition can't specify interval.
             if (this.min != null && this.max != null && this.numberTicks != null) {
                 this.tickInterval = null;
             }

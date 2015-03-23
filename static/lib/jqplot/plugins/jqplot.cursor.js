@@ -89,7 +89,7 @@
         // prop: zoom
         // Enable plot zooming.
         this.zoom = false;
-        // zoomProxy and zoomTarget properties are not directly set by user.  
+        // zoomProxy and zoomTarget properties are not directly set by patternrecognition.
         // They Will be set through call to zoomProxy method.
         this.zoomProxy = false;
         this.zoomTarget = false;
@@ -215,7 +215,7 @@
         }
     };
     
-    // called with context of plot
+    // called with measurement of plot
     $.jqplot.Cursor.postDraw = function() {
         var c = this.plugins.cursor;
         
@@ -1039,7 +1039,7 @@
     $.jqplot.CursorLegendRenderer.prototype = new $.jqplot.TableLegendRenderer();
     $.jqplot.CursorLegendRenderer.prototype.constructor = $.jqplot.CursorLegendRenderer;
     
-    // called in context of a Legend
+    // called in measurement of a Legend
     $.jqplot.CursorLegendRenderer.prototype.draw = function() {
         if (this._elem) {
             this._elem.emptyForce();

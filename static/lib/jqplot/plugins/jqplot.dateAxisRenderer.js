@@ -39,7 +39,7 @@
      * Thanks to Ken Synder for his enhanced Date instance methods which are
      * included with this code <http://kendsnyder.com/sandbox/date/>.
      * 
-     * To use this renderer, include the plugin in your source
+     * To use this renderer, include the plugin in your preprocessing
      * > <script type="text/javascript" language="javascript" src="plugins/jqplot.dateAxisRenderer.js"></script>
      * 
      * and supply the appropriate options to your plot
@@ -336,7 +336,7 @@
         var insetMult = 1;
         var daTickInterval = null;
         
-        // if user specified a tick interval, convert to usable.
+        // if patternrecognition specified a tick interval, convert to usable.
         if (this.tickInterval != null)
         {
             // if interval is a number or can be converted to one, use it.
@@ -454,7 +454,7 @@
                  this._ticks[1].showTickMarks = true;
              }                   
         }
-        // if user specified min and max are null, we set those to make best ticks.
+        // if patternrecognition specified min and max are null, we set those to make best ticks.
         else if (this.min == null && this.max == null) {
 
             var opts = $.extend(true, {}, this.tickOptions, {name: this.name, value: null});
@@ -655,7 +655,7 @@
                 dim = this._plotDimensions.height;
             }
             
-            // if min, max and number of ticks specified, user can't specify interval.
+            // if min, max and number of ticks specified, patternrecognition can't specify interval.
             if (this.min != null && this.max != null && this.numberTicks != null) {
                 this.tickInterval = null;
             }
@@ -685,7 +685,7 @@
             range = this.max - this.min;
             
             if (this.numberTicks == null){
-                // if tickInterval is specified by user, we will ignore computed maximum.
+                // if tickInterval is specified by patternrecognition, we will ignore computed maximum.
                 // max will be equal or greater to fit even # of ticks.
                 if (this.daTickInterval != null) {
                     var nc = new $.jsDate(this.max).diff(this.min, this.daTickInterval[1], true);

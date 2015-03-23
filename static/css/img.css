@@ -1,0 +1,17 @@
+.icon-good {
+    background-image: url("./img/good-warning-error.png");
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    background-size: Auto 100%;
+    width: 25px;
+    height: 24px;
+}
+
+.icon-bad {
+    background-image: url("./img/good-warning-error.png");
+    background-position: -50px 0px;
+    background-repeat: no-repeat;
+    background-size: Auto 100%;
+    width: 25px;
+    height: 24px;
+}

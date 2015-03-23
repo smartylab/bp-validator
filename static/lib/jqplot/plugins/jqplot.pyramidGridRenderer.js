@@ -39,7 +39,7 @@
     $.jqplot.PyramidGridRenderer.prototype = new $.jqplot.CanvasGridRenderer();
     $.jqplot.PyramidGridRenderer.prototype.constructor = $.jqplot.PyramidGridRenderer;
     
-    // called with context of Grid object
+    // called with measurement of Grid object
     $.jqplot.CanvasGridRenderer.prototype.init = function(options) {
         this._ctx;
         this.plotBands = {

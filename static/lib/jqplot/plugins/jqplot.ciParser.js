@@ -40,7 +40,7 @@
      * City Index API spec.
      * 
      * Note that calling the renderer function is handled internally by jqPlot.  The
-     * user does not have to call the function.  The parameters described below will
+     * patternrecognition does not have to call the function.  The parameters described below will
      * automatically be passed to the ciParser function.
      * 
      * Parameters:

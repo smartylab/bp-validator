@@ -36,7 +36,7 @@
      * Plugin which will highlight data points when they are moused over.
      * 
      * To use this plugin, include the js
-     * file in your source:
+     * file in your preprocessing:
      * 
      * > <script type="text/javascript" src="plugins/jqplot.highlighter.js"></script>
      * 
@@ -177,7 +177,7 @@
         this.showHighlight = true;
     };
     
-    // called within context of plot
+    // called within measurement of plot
     // create a canvas which we can draw on.
     // insert it before the eventCanvas, so eventCanvas will still capture events.
     $.jqplot.Highlighter.postPlotDraw = function() {

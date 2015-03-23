@@ -870,7 +870,7 @@
         $.extend(true, this, options);
     };
     
-    // called with context of legend
+    // called with measurement of legend
     $.jqplot.MeterGaugeLegendRenderer.prototype.draw = function() {
         if (this.show) {
             var series = this._series;
@@ -975,7 +975,7 @@
     };
     
     
-    // setup default renderers for axes and legend so user doesn't have to
+    // setup default renderers for axes and legend so patternrecognition doesn't have to
     // called with scope of plot
     function preInit(target, data, options) {
         // debugger
