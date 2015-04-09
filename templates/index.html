@@ -19,12 +19,12 @@
     <div class="layout-root center">
         <div class="space" style="margin:30px"></div>
         <div class="box center">
-            <form action="{% url 'test' %}"  method="post" enctype="multipart/form-data">
+            <form id="f-valtesting" action="{% url 'test' %}"  method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 Business Process File: {{ form.docfile }}
                 <div class="right">
                     <div class="left">Namespace: {{ form.appns }}</div>
-                    <button type="submit" class="left" style="margin-top:-3px;">Start Testing</button>
+                    <button id="bt-start" type="button" class="left" style="margin-top:-3px;">Start Testing</button>
                 </div>
             </form>
         </div>
@@ -190,6 +190,21 @@
             $("#bt-done").click(function() {
                 window.location = "/";
             });
+            $("#bt-start").click(function() {
+                $.blockUI({ css: {
+                    border: 'none',
+                    padding: '15px',
+                    backgroundColor: '#000',
+                    '-webkit-border-radius': '10px',
+                    '-moz-border-radius': '10px',
+                    opacity: .5,
+                    color: '#fff'
+                } });
+                setTimeout(function() {$("#f-valtesting").submit();}, 500);
+
+{#                setTimeout($.unblockUI, 2000);#}
+            });
+
 
             var $validityA1M = $("#cell-validity-a-1").next();
             var $validityA1D = $validityA1M.next();

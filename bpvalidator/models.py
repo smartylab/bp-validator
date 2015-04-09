@@ -25,7 +25,7 @@ class BusinessProcess():
         self.root = root
         self.ns = ns
         self.appns = appns
-
+        self.lgs = None
         self.parse()
 
 
