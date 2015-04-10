@@ -78,8 +78,13 @@ class LinkGraph:
 
 
     def parse(self):
-        self.nodes = self.root.find(self.ns[self.appns]+"nodes").findall(self.ns[self.appns]+"Node")
-        self.topics = self.root.find(self.ns[self.appns]+"topics").findall(self.ns[self.appns]+"Topic")
-        self.actions = self.root.find(self.ns[self.appns]+"actions").findall(self.ns[self.appns]+"Action")
-        self.services = self.root.find(self.ns[self.appns]+"services").findall(self.ns[self.appns]+"Service")
-        self.edges = self.root.find(self.ns[self.appns]+"edges").findall(self.ns[self.appns]+"Edge")
+        try: self.nodes = self.root.find(self.ns[self.appns]+"nodes").findall(self.ns[self.appns]+"Node")
+        except: self.nodes = None
+        try: self.topics = self.root.find(self.ns[self.appns]+"topics").findall(self.ns[self.appns]+"Topic")
+        except: self.topics = None
+        try: self.actions = self.root.find(self.ns[self.appns]+"actions").findall(self.ns[self.appns]+"Action")
+        except: self.actions = None
+        try: self.services = self.root.find(self.ns[self.appns]+"services").findall(self.ns[self.appns]+"Service")
+        except: self.services = None
+        try: self.edges = self.root.find(self.ns[self.appns]+"edges").findall(self.ns[self.appns]+"Edge")
+        except: self.edges = None

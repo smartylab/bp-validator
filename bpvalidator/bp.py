@@ -40,6 +40,9 @@ def check(request):
 
 def check_all(f, appns):
     root, ns = parse_and_get_ns(f)
+
+    if appns not in ns: return None
+
     bp = BusinessProcess(root, ns, appns)
     lgs = bp.lgs
 

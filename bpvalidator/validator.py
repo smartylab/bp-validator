@@ -5,7 +5,8 @@ __author__ = 'Moon Kwon Kim <mkdmkk@gmail.com>'
 
 
 CONCERT_ADAPTER_NS = 'http://smartylab.co.kr/products/op/adapter'
-MESSAGE_DATABASE_SERVER_URL = 'http://172.16.113.206:10000/api/rocon_app'
+MESSAGE_DATABASE_SERVER_URL = 'http://localhost:10000/api/rocon_app'
+# MESSAGE_DATABASE_SERVER_URL = 'http://172.16.113.206:10000/api/rocon_app'
 # MESSAGE_DATABASE_SERVER_URL = 'http://61.32.117.202:10000/api/rocon_app' # Yujin Robot Msg DB
 
 class EssentialElementValidator:
@@ -56,6 +57,9 @@ class LinkGraphValidator:
 
 
     def check_linkgraph_resources(self, nodes, ns, appns):
+        if not nodes:
+            return False, ["No Nodes Found."]
+
         validity = True
         errors = []
 
@@ -83,32 +87,35 @@ class LinkGraphValidator:
 
         try:
             data = r.json()
-            for t in topics:
-                name = t.find(ns[appns]+'id').text
-                if not name:
-                    validity = False
-                    errors.append("No Topic Name Specified.")
-                if not self.investigate_msgdb_result(data, name):
-                    validity = False
-                    errors.append("No Matched Topic: ["+name+"]")
+            if topics:
+                for t in topics:
+                    name = t.find(ns[appns]+'id').text
+                    if not name:
+                        validity = False
+                        errors.append("No Topic Name Specified.")
+                    if not self.investigate_msgdb_result(data, name):
+                        validity = False
+                        errors.append("No Matched Topic: ["+name+"]")
 
-            for a in actions:
-                name = a.find(ns[appns]+'id').text
-                if not name:
-                    validity = False
-                    errors.append("No Action Name Specified.")
-                if not self.investigate_msgdb_result(data, name):
-                    validity = False
-                    errors.append("No Matched Action: ["+name+"]")
+            if actions:
+                for a in actions:
+                    name = a.find(ns[appns]+'id').text
+                    if not name:
+                        validity = False
+                        errors.append("No Action Name Specified.")
+                    if not self.investigate_msgdb_result(data, name):
+                        validity = False
+                        errors.append("No Matched Action: ["+name+"]")
 
-            for s in services:
-                name = s.find(ns[appns]+'id').text
-                if not name:
-                    validity = False
-                    errors.append("No Service Name Specified.")
-                if not self.investigate_msgdb_result(data, name):
-                    validity = False
-                    errors.append("No Matched Service: ["+name+"]")
+            if services:
+                for s in services:
+                    name = s.find(ns[appns]+'id').text
+                    if not name:
+                        validity = False
+                        errors.append("No Service Name Specified.")
+                    if not self.investigate_msgdb_result(data, name):
+                        validity = False
+                        errors.append("No Matched Service: ["+name+"]")
 
             return validity, None if validity else errors
         except:
@@ -116,6 +123,8 @@ class LinkGraphValidator:
 
 
     def check_linkgraph_edges(self, edges, nodes, topics, actions, services, ns, appns):
+        if not edges:
+            return False, ["No Edges Found."]
         validity = True
         errors = []
 
@@ -128,28 +137,24 @@ class LinkGraphValidator:
             if start != None and finish != None:
                 # Check Start Statement
                 tmp = False
-                for node in nodes:
-                    if node.find(ns[appns]+"id").text == start.text:
-                        tmp = True
-                        break
-                if not tmp:
+                if nodes:
+                    for node in nodes:
+                        if node.find(ns[appns]+"id").text == start.text:
+                            tmp = True
+                            break
+                if (not tmp) and topics:
                     for topic in topics:
                         if topic.find(ns[appns]+"id").text == start.text:
                             tmp = True
                             break
-                if not tmp:
+                if (not tmp) and actions:
                     for action in actions:
                         if action.find(ns[appns]+"id").text == start.text:
                             tmp = True
                             break
-                if not tmp:
+                if (not tmp) and services:
                     for service in services:
                         if service.find(ns[appns]+"id").text == start.text:
-                            tmp = True
-                            break
-                if not tmp:
-                    for topic in topics:
-                        if topic.find(ns[appns]+"id").text == start.text:
                             tmp = True
                             break
                 if not tmp:
