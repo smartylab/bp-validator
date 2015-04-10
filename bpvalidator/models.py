@@ -30,19 +30,29 @@ class BusinessProcess():
 
 
     def parse(self):
-        self.importing = self.root.findall(self.ns['bpel']+'import')
-        self.lg_assignments = self.root.findall('./'+self.ns['bpel']+'sequence'+'/'+self.ns['bpel']+'assign')
-        self.invokations = self.root.findall('./'+self.ns['bpel']+'sequence'+'/'+self.ns['bpel']+'invoke')
+        print("Parsing...")
+        self.importing = self.root.findall('.//'+self.ns['bpel']+'import')
+        print("Importing: %s" % self.importing)
+
+        self.lg_assignments = self.root.findall('.//'+
+                                                self.ns['bpel']+'sequence'+'/'+
+                                                self.ns['bpel']+'assign'+'/'+
+                                                self.ns['bpel']+'copy'+'/'+
+                                                self.ns['bpel']+'from'+'/'+
+                                                self.ns['bpel']+'literal'+'/'+
+                                                self.ns[self.appns]+'invoke_adapter')
+        print("Assigning (invoke_adapter): %s" % self.lg_assignments)
+
+        self.invokations = self.root.findall('.//'+
+                                             self.ns['bpel']+'sequence'+'/'+
+                                             self.ns['bpel']+'invoke[@operation="invoke_adapter"]')
+        print("Invoking (invoke_adapter): %s" % self.invokations)
 
         self.lgs = []
         for p in self.lg_assignments:
             subp = None
             try:
-                subp = p.find(self.ns['bpel']+"copy")\
-                    .find(self.ns['bpel']+"from")\
-                    .find(self.ns['bpel']+'literal')\
-                    .find(self.ns[self.appns]+'invoke_adapter')\
-                    .find(self.ns[self.appns]+'LinkGraph')
+                subp = p.find(self.ns[self.appns]+'LinkGraph')
             except: continue
             if subp is not None:
                 self.lgs.append(LinkGraph(subp, self.ns, self.appns))
@@ -70,4 +80,6 @@ class LinkGraph:
     def parse(self):
         self.nodes = self.root.find(self.ns[self.appns]+"nodes").findall(self.ns[self.appns]+"Node")
         self.topics = self.root.find(self.ns[self.appns]+"topics").findall(self.ns[self.appns]+"Topic")
+        self.actions = self.root.find(self.ns[self.appns]+"actions").findall(self.ns[self.appns]+"Action")
+        self.services = self.root.find(self.ns[self.appns]+"services").findall(self.ns[self.appns]+"Service")
         self.edges = self.root.find(self.ns[self.appns]+"edges").findall(self.ns[self.appns]+"Edge")

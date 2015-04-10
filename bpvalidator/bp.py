@@ -53,11 +53,12 @@ def check_all(f, appns):
     if lgs:
         for lg in lgs:
             validity_resources, errors_linkgraph_resources = lg_validator.check_linkgraph_resources(lg.nodes, ns, appns)
-            validity_topics, errors_linkgraph_topics = lg_validator.check_linkgraph_topics(lg.topics, ns, appns)
-            validity_edges, errors_linkgraph_edges = lg_validator.check_linkgraph_edges(lg.edges, lg.nodes, lg.topics, ns, appns)
+            validity_topics_actions_services, errors_linkgraph_topics_actions_services = \
+                lg_validator.check_linkgraph_topics_actions_services(lg.topics, lg.actions, lg.services, ns, appns)
+            validity_edges, errors_linkgraph_edges = lg_validator.check_linkgraph_edges(lg.edges, lg.nodes, lg.topics, lg.actions, lg.services, ns, appns)
     else:
         validity_resources, errors_linkgraph_resources = False, ["Parsing error."]
-        validity_topics, errors_linkgraph_topics = False, ["Parsing error."]
+        validity_topics_actions_services, errors_linkgraph_topics_actions_services = False, ["Parsing error."]
         validity_edges, errors_linkgraph_edges = False, ["Parsing error."]
 
     return {
@@ -65,7 +66,7 @@ def check_all(f, appns):
         "a2": {'status': 'valid' if validity_part_linkgraphassignment else 'error', 'errors': errors_part_linkgraphassignment },
         "a3": {'status': 'valid' if validity_part_invokation else 'error', 'errors': errors_part_invokation },
         "b1": {'status': 'valid' if validity_resources else 'error', 'errors': errors_linkgraph_resources },
-        "b2": {'status': 'valid' if validity_topics else 'error', 'errors': errors_linkgraph_topics },
+        "b2": {'status': 'valid' if validity_topics_actions_services else 'error', 'errors': errors_linkgraph_topics_actions_services },
         "b3": {'status': 'valid' if validity_edges else 'error', 'errors': errors_linkgraph_edges }
     }
 

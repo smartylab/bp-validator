@@ -5,7 +5,8 @@ __author__ = 'Moon Kwon Kim <mkdmkk@gmail.com>'
 
 
 CONCERT_ADAPTER_NS = 'http://smartylab.co.kr/products/op/adapter'
-MESSAGE_DATABASE_SERVER_URL = 'http://172.16.113.205:10000/api/rocon_app'
+MESSAGE_DATABASE_SERVER_URL = 'http://172.16.113.206:10000/api/rocon_app'
+# MESSAGE_DATABASE_SERVER_URL = 'http://61.32.117.202:10000/api/rocon_app' # Yujin Robot Msg DB
 
 class EssentialElementValidator:
     def __init__(self):
@@ -31,7 +32,7 @@ class EssentialElementValidator:
         if len(linkgraphes):
             # print(subp.tag)
             # print(subp.attrib)
-                validity = True
+            validity = True
 
         return validity, None if validity else ["No Link Graph Assignment."]
 
@@ -71,29 +72,50 @@ class LinkGraphValidator:
         return validity, None if validity else errors
 
 
-    def check_linkgraph_topics(self, topics, ns, appns):
+    def check_linkgraph_topics_actions_services(self, topics, actions, services, ns, appns):
         validity = True
         errors = []
 
         try:
             r = requests.get(MESSAGE_DATABASE_SERVER_URL, timeout=2)
-
-            data = r.json()
-            for t in topics:
-                tname = t.find(ns[appns]+'id').text
-                if not tname:
-                    validity = False
-                    errors.append("No Topic Name Specified.")
-                if not self.search_topic(data, tname):
-                    validity = False
-                    errors.append("No Matched Topic: ["+tname+"]")
-
-            return validity, None if validity else errors
         except:
             return False, ["Message DB is not available."]
 
+        try:
+            data = r.json()
+            for t in topics:
+                name = t.find(ns[appns]+'id').text
+                if not name:
+                    validity = False
+                    errors.append("No Topic Name Specified.")
+                if not self.investigate_msgdb_result(data, name):
+                    validity = False
+                    errors.append("No Matched Topic: ["+name+"]")
 
-    def check_linkgraph_edges(self, edges, nodes, topics, ns, appns):
+            for a in actions:
+                name = a.find(ns[appns]+'id').text
+                if not name:
+                    validity = False
+                    errors.append("No Action Name Specified.")
+                if not self.investigate_msgdb_result(data, name):
+                    validity = False
+                    errors.append("No Matched Action: ["+name+"]")
+
+            for s in services:
+                name = s.find(ns[appns]+'id').text
+                if not name:
+                    validity = False
+                    errors.append("No Service Name Specified.")
+                if not self.investigate_msgdb_result(data, name):
+                    validity = False
+                    errors.append("No Matched Service: ["+name+"]")
+
+            return validity, None if validity else errors
+        except:
+            return False, ["Message DB Investigation Error."]
+
+
+    def check_linkgraph_edges(self, edges, nodes, topics, actions, services, ns, appns):
         validity = True
         errors = []
 
@@ -110,6 +132,21 @@ class LinkGraphValidator:
                     if node.find(ns[appns]+"id").text == start.text:
                         tmp = True
                         break
+                if not tmp:
+                    for topic in topics:
+                        if topic.find(ns[appns]+"id").text == start.text:
+                            tmp = True
+                            break
+                if not tmp:
+                    for action in actions:
+                        if action.find(ns[appns]+"id").text == start.text:
+                            tmp = True
+                            break
+                if not tmp:
+                    for service in services:
+                        if service.find(ns[appns]+"id").text == start.text:
+                            tmp = True
+                            break
                 if not tmp:
                     for topic in topics:
                         if topic.find(ns[appns]+"id").text == start.text:
@@ -138,15 +175,15 @@ class LinkGraphValidator:
         return validity, None if validity else errors
 
 
-    def search_topic(self, data, value):
+    def investigate_msgdb_result(self, data, value):
         if type(data) is list:
             for d in data:
-                if self.search_topic(d, value):
+                if self.investigate_msgdb_result(d, value):
                     return True
         elif type(data) is dict:
             for k, v in data.iteritems():
                 if type(v) is list or type(v) is dict:
-                    if self.search_topic(v, value):
+                    if self.investigate_msgdb_result(v, value):
                         return True
                 else:
                     if k == 'name' and v == value:
