@@ -5,9 +5,9 @@ __author__ = 'Moon Kwon Kim <mkdmkk@gmail.com>'
 
 
 CONCERT_ADAPTER_NS = 'http://smartylab.co.kr/products/op/adapter'
-MESSAGE_DATABASE_SERVER_URL = 'http://localhost:10000/api/rocon_app'
+# MESSAGE_DATABASE_SERVER_URL = 'http://localhost:10000/api/rocon_app'
 # MESSAGE_DATABASE_SERVER_URL = 'http://172.16.113.206:10000/api/rocon_app'
-# MESSAGE_DATABASE_SERVER_URL = 'http://61.32.117.202:10000/api/rocon_app' # Yujin Robot Msg DB
+MESSAGE_DATABASE_SERVER_URL = 'http://protocols.robotconcert.org/api/rocon_app' # Yujin Robot Msg DB
 
 class EssentialElementValidator:
     def __init__(self):
